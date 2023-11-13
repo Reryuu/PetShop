@@ -1,0 +1,71 @@
+﻿@model IEnumerable<PetShop.Models.CauHinh>
+
+@{
+    ViewBag.Title = "Cau Hinh";
+}
+
+<div id="page-wrapper">
+    <div class="main-page">
+        <div class="blank-page widget-shadow scroll" id="style-2 div1">
+            <h2>Index</h2>
+
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TenCauHinh)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.GiaTriCauHinh)
+                        </th>
+                        <th>
+                            Option
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TenCauHinh)
+                            </td>
+                            <td>
+                                @if (@item.GiaTriCauHinh.StartsWith("img/"))
+                                {
+                                    <img src="@item.GiaTriCauHinh" style="width:140px; height:100px" />
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.GiaTriCauHinh)
+                                }
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+
+@*                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+*@                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        var R = {
+            Init: function () {
+                R.InitDataTable();
+            },
+            RegisterEvent: function () { },
+            InitDataTable: function () {
+                $('.table').DataTable()
+            }
+        }
+        R.Init()
+    </script>
+}
